@@ -3,12 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Net.Http.Json;
+using System.Net.Http;
 
 namespace CEPBLL
 {
     public class ConsultaCEP
     {
-        public CEP Consultar(string CepConslta)
+        private readonly HttpClient _httpClient;
+        public ConsultaCEP()
+
+        {
+            _httpClient = new HttpClient();
+        }
+   
+        public CEP Consultar(string CepConsulta)
         {
             CEP cepRetorno = new CEP();
             cepRetorno.Bairro = "Boqueirao";
@@ -18,7 +27,8 @@ namespace CEPBLL
             cepRetorno.Localidade = "Santos";
             cepRetorno.Cep = "11045-907";
             cepRetorno.Uf = "SP";
-            return cepRetorno;
+
+            return _httpClient.GetFromJsonAsync<CEP>($"https://viacep.com.br/ws/{CepConsulta}/json/").Result;
         }
     }
 }

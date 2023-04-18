@@ -1,3 +1,5 @@
+using CEPBLL;
+
 namespace WinCEP
 {
     public partial class Form1 : Form
@@ -11,9 +13,14 @@ namespace WinCEP
         {
             ConsultaCEP consultaCEP = new ConsultaCEP();
             CEP cep = consultaCEP.Consultar(txtCEP.Text);
-            txtendereco.Text = cep.Lagradouro;
-            txtCidade.Text = $"{cep.localidade} {cep.Uf}";
-            txtbairro.Text = cep.bairro;    
+            txtendereco.Text = cep.Logradouro;
+            txtCidade.Text = $"{cep.Localidade} {cep.Uf}";
+            txtbairro.Text = cep.Bairro;
+
+        }
+
+        private void txtendereco_TextChanged(object sender, EventArgs e)
+        {
 
         }
     }
